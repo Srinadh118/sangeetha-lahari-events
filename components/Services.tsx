@@ -9,6 +9,7 @@ export default function Services() {
   const [activeIndex, setActiveIndex] = useState(0);
   const isScrolling = useRef(false);
   const scrollTimeoutRef = useRef<number | null>(null);
+  const cleanupScrollRef = useRef<(() => void) | null>(null);
 
   const services = [
     {
@@ -57,7 +58,6 @@ export default function Services() {
     };
 
     const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-      console.log("handleIntersection entry ids:", entries.map(e => `${e.target.id} (intersecting: ${e.isIntersecting})`), "isScrolling:", isScrolling.current);
       // Ignore intersection updates while a navigation transition (click) is scrolling the page
       if (isScrolling.current) return;
 
@@ -66,7 +66,6 @@ export default function Services() {
           const id = entry.target.id;
           const idx = parseInt(id.split("-")[2], 10);
           if (!isNaN(idx)) {
-            console.log("Setting active index from observer:", idx);
             setActiveIndex(idx);
           }
         }
@@ -84,22 +83,56 @@ export default function Services() {
   }, []);
 
   const handleNavClick = (idx: number) => {
-    console.log("handleNavClick called with:", idx);
     isScrolling.current = true;
     setActiveIndex(idx);
 
-    const target = document.getElementById(`service-scroll-${idx}`);
-    if (target) {
-      console.log("Scrolling target into view:", target.id);
-      target.scrollIntoView({ behavior: "smooth", block: "center" });
+    // Clean up any existing listeners/timeouts from previous clicks
+    if (cleanupScrollRef.current) {
+      cleanupScrollRef.current();
     }
 
-    // Debounce lock release to prevent intermediate cards from stealing focus
-    if (scrollTimeoutRef.current) window.clearTimeout(scrollTimeoutRef.current);
-    scrollTimeoutRef.current = window.setTimeout(() => {
-      console.log("Timeout finished. Resetting isScrolling to false");
+    // Delay scrollIntoView slightly to allow React layout reflow (card expansion/collapse) to settle
+    const scrollTimeout = window.setTimeout(() => {
+      const target = document.getElementById(`service-scroll-${idx}`);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+
+      let isScrollingTimeout: number;
+
+      const handleScroll = () => {
+        window.clearTimeout(isScrollingTimeout);
+        isScrollingTimeout = window.setTimeout(() => {
+          cleanup();
+        }, 150); // 150ms of no scroll events means scrolling has stopped
+      };
+
+      const cleanup = () => {
+        window.removeEventListener("scroll", handleScroll);
+        window.clearTimeout(isScrollingTimeout);
+        if (scrollTimeoutRef.current) {
+          window.clearTimeout(scrollTimeoutRef.current);
+          scrollTimeoutRef.current = null;
+        }
+        isScrolling.current = false;
+        cleanupScrollRef.current = null;
+      };
+
+      cleanupScrollRef.current = cleanup;
+      window.addEventListener("scroll", handleScroll);
+
+      // Fallback timeout in case no scroll event happens (e.g. target already in center)
+      scrollTimeoutRef.current = window.setTimeout(() => {
+        cleanup();
+      }, 1500);
+    }, 100);
+
+    // Store initial cleanup to clear the 100ms timeout if user clicks another item quickly
+    cleanupScrollRef.current = () => {
+      window.clearTimeout(scrollTimeout);
       isScrolling.current = false;
-    }, 1000);
+      cleanupScrollRef.current = null;
+    };
   };
 
   // Card theme styling map - very light shades of brand-olive and brand-orange
