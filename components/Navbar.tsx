@@ -40,10 +40,16 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8 h-full flex items-center justify-between">
           {/* Logo */}
           <a href="#home" className="flex flex-col group">
-            <span className="font-serif text-lg md:text-xl font-bold tracking-tight text-ink">
+            <span className={`font-serif text-lg md:text-xl font-bold tracking-tight transition-colors duration-300 ${
+              isScrolled ? "text-ink" : "text-white"
+            }`}>
               SANGEETHA LAHARI
             </span>
-            <span className="font-sans text-[10px] tracking-[0.2em] font-semibold text-muted -mt-1 group-hover:text-brand-pink transition-colors">
+            <span className={`font-sans text-[10px] tracking-[0.2em] font-semibold transition-colors duration-300 -mt-1 ${
+              isScrolled
+                ? "text-muted group-hover:text-brand-pink"
+                : "text-white/60 group-hover:text-brand-peach"
+            }`}>
               EVENTS & CELEBRATIONS
             </span>
           </a>
@@ -54,7 +60,11 @@ export default function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
-                className="font-sans text-sm font-medium text-muted hover:text-ink transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-brand-pink after:transition-all hover:after:w-full"
+                className={`font-sans text-sm font-medium transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:transition-all hover:after:w-full ${
+                  isScrolled
+                    ? "text-muted hover:text-ink after:bg-brand-pink"
+                    : "text-white/70 hover:text-white after:bg-brand-peach"
+                }`}
               >
                 {link.name}
               </a>
@@ -65,14 +75,22 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
             <a
               href="#contact"
-              className="hidden sm:inline-flex items-center justify-center px-5 py-2.5 bg-primary hover:bg-primary-active text-on-primary font-sans text-sm font-semibold rounded-md transition-colors shadow-sm"
+              className={`hidden sm:inline-flex items-center justify-center px-5 py-2.5 font-sans text-sm font-semibold rounded-md transition-all shadow-sm ${
+                isScrolled
+                  ? "bg-primary hover:bg-primary-active text-on-primary"
+                  : "bg-brand-peach hover:bg-brand-peach/90 text-primary"
+              }`}
             >
               Get Quote
             </a>
             
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 md:hidden text-ink hover:text-brand-pink transition-colors focus:outline-none"
+              className={`p-2 md:hidden transition-colors focus:outline-none ${
+                isScrolled
+                  ? "text-ink hover:text-brand-pink"
+                  : "text-white hover:text-brand-peach"
+              }`}
               aria-label="Toggle Menu"
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}

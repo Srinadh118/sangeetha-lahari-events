@@ -1,20 +1,13 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 
 export default function Hero() {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [useFallback, setUseFallback] = useState(false);
-
-  useEffect(() => {
-    // Check if image exists
-    const img = new Image();
-    img.src = "/images/hero-bg.jpg";
-    img.onload = () => setImageLoaded(true);
-    img.onerror = () => setUseFallback(true);
-  }, []);
 
   return (
     <section
@@ -24,11 +17,21 @@ export default function Hero() {
       {/* Background Media */}
       {!useFallback ? (
         <div
-          className={`absolute inset-0 z-0 transition-opacity duration-1000 bg-cover bg-center ${
+          className={`absolute inset-0 z-0 transition-all duration-1000 ${
             imageLoaded ? "opacity-40 scale-100" : "opacity-0 scale-105"
           }`}
-          style={{ backgroundImage: "url('/images/hero-bg.jpg')" }}
-        />
+        >
+          <Image
+            src="/images/hero-bg.webp"
+            alt="Luxury Event Backdrop"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+            onLoad={() => setImageLoaded(true)}
+            onError={() => setUseFallback(true)}
+          />
+        </div>
       ) : (
         /* Luxury Mesh Gradient Fallback */
         <div className="absolute inset-0 z-0 bg-[#0a0a0a]">

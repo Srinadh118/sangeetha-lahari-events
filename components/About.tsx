@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { User, Target, Eye, ShieldCheck } from "lucide-react";
+import Image from "next/image";
+import { Target, Eye, ShieldCheck } from "lucide-react";
 
 export default function About() {
   const cards = [
@@ -35,29 +36,24 @@ export default function About() {
         {/* Main Legacy Row */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-20">
           
-          {/* Left Column: CEO Portrait Placeholder */}
+          {/* Left Column: CEO Portrait Image */}
           <div className="lg:col-span-5 flex flex-col items-center">
-            <div className="relative w-full aspect-[3/4] max-w-sm rounded-xl overflow-hidden bg-surface-soft border border-hairline flex flex-col items-center justify-center text-center p-8 shadow-sm">
-              <div className="absolute inset-0 bg-gradient-to-tr from-brand-peach/10 via-transparent to-brand-lavender/10" />
+            <div className="relative w-full aspect-[3/4] max-w-sm rounded-xl overflow-hidden bg-surface-soft border border-hairline shadow-lg group">
+              <Image
+                src="/images/about-ceo.jpg"
+                alt="Mr. Suresh, Chief Organizer & Founder"
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
               
-              {/* Profile Icon Placeholder */}
-              <div className="relative z-10 w-24 h-24 rounded-full bg-surface-strong flex items-center justify-center border border-hairline mb-4">
-                <User className="w-10 h-10 text-muted" />
-              </div>
-              
-              <h4 className="relative z-10 font-serif text-xl font-bold text-ink">
-                Mr. Suresh
-              </h4>
-              <span className="relative z-10 font-sans text-xs font-semibold text-muted uppercase tracking-wider mb-6">
-                Chief Organizer & Founder
-              </span>
-
-              <div className="relative z-10 p-3 bg-canvas border border-hairline/60 rounded-md">
-                <span className="font-sans text-[11px] text-muted">
-                  Replace with founder portrait by saving: <br />
-                  <code className="font-mono text-[10px] text-brand-pink block mt-1">
-                    public/images/about-ceo.jpg
-                  </code>
+              <div className="absolute bottom-6 left-6 z-10 text-left">
+                <h4 className="font-serif text-xl font-bold text-white mb-1">
+                  Mr. Suresh
+                </h4>
+                <span className="font-sans text-xs font-semibold text-brand-peach uppercase tracking-widest">
+                  Chief Organizer & Founder
                 </span>
               </div>
             </div>

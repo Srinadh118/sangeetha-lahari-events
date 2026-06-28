@@ -74,13 +74,7 @@ export default function CTA() {
               </a>
             </div>
 
-            {/* User instructions badge for background photo overlay */}
-            <div className="mt-8 p-3 bg-white/5 border border-white/10 rounded-md w-fit text-xs text-white/50 font-sans">
-              To overlay a background photo, place file: <br />
-              <code className="font-mono text-brand-peach text-[11px] block mt-1">
-                public/images/cta-bg.jpg
-              </code>
-            </div>
+
           </div>
 
           {/* Right Column: Quick Enquiry Form */}
