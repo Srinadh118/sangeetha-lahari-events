@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowUpRight, X, ChevronLeft, ChevronRight, Image as ImageIcon } from "lucide-react";
+import Image from "next/image";
+import { ArrowUpRight, X, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Project {
   id: number;
@@ -25,7 +26,7 @@ export default function Gallery() {
       title: "Grand Royal Wedding",
       location: "GMR Arena, Hyderabad",
       category: "Wedding",
-      imageName: "gallery-wedding-1.jpg",
+      imageName: "gallery-wedding-1.webp",
       bgGradient: "from-brand-pink/20 to-primary/40",
       heightClass: "h-96",
     },
@@ -34,7 +35,7 @@ export default function Gallery() {
       title: "Elegant Ballroom Reception",
       location: "Novotel, Hyderabad",
       category: "Reception",
-      imageName: "gallery-reception.jpg",
+      imageName: "gallery-reception.webp",
       bgGradient: "from-brand-lavender/20 to-primary/40",
       heightClass: "h-72",
     },
@@ -43,7 +44,7 @@ export default function Gallery() {
       title: "Annual Corporate Gala",
       location: "HICC Convention, Hyderabad",
       category: "Corporate",
-      imageName: "gallery-corporate.jpg",
+      imageName: "gallery-corporate.webp",
       bgGradient: "from-brand-teal/20 to-primary/40",
       heightClass: "h-80",
     },
@@ -52,7 +53,7 @@ export default function Gallery() {
       title: "Vibrant Haldi Ceremony",
       location: "Private Farmhouse, Shamshabad",
       category: "Social",
-      imageName: "gallery-haldi.jpg",
+      imageName: "gallery-haldi.webp",
       bgGradient: "from-brand-ochre/20 to-primary/40",
       heightClass: "h-96",
     },
@@ -61,7 +62,7 @@ export default function Gallery() {
       title: "Floral Stage Showcase",
       location: "JRC Conventions, Jubilee Hills",
       category: "Wedding",
-      imageName: "gallery-stage.jpg",
+      imageName: "gallery-stage.webp",
       bgGradient: "from-brand-coral/20 to-primary/40",
       heightClass: "h-72",
     },
@@ -70,7 +71,7 @@ export default function Gallery() {
       title: "Vibrant Mehendi Celebration",
       location: "N Convention, Madhapur",
       category: "Social",
-      imageName: "gallery-mehendi.jpg",
+      imageName: "gallery-mehendi.webp",
       bgGradient: "from-brand-peach/20 to-primary/40",
       heightClass: "h-80",
     },
@@ -141,15 +142,15 @@ export default function Gallery() {
               onClick={() => openLightbox(project.id)}
               className={`group relative rounded-xl overflow-hidden cursor-pointer border border-hairline/50 transition-all duration-300 bg-surface-soft hover:-translate-y-1 hover:shadow-md ${project.heightClass}`}
             >
-              {/* Fallback stylized placeholder overlay */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${project.bgGradient} z-0 flex flex-col items-center justify-center p-6 text-center`}>
-                <ImageIcon className="w-8 h-8 text-muted/40 mb-3" />
-                <span className="font-sans text-xs text-muted/60 font-semibold mb-1">
-                  Upload file to:
-                </span>
-                <span className="font-mono text-[10px] text-muted bg-canvas px-2 py-1 rounded shadow-sm border border-hairline/30">
-                  public/images/{project.imageName}
-                </span>
+              {/* Project Image */}
+              <div className="absolute inset-0 z-0 bg-surface-card">
+                <Image
+                  src={`/images/${project.imageName}`}
+                  alt={project.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
               </div>
 
               {/* Hover content */}
@@ -208,23 +209,16 @@ export default function Gallery() {
 
             {/* Display View */}
             <div className="flex-1 max-h-[70vh] flex flex-col items-center justify-center">
-              {/* Main Placeholder Container */}
-              <div className={`w-full max-w-2xl h-80 md:h-96 rounded-xl border border-white/10 flex flex-col items-center justify-center text-center p-8 bg-gradient-to-br ${projects[lightboxIndex].bgGradient}`}>
-                <ImageIcon className="w-12 h-12 text-white/20 mb-4" />
-                <h4 className="font-serif text-2xl font-bold text-white mb-2">
-                  {projects[lightboxIndex].title}
-                </h4>
-                <p className="font-sans text-xs text-white/60 mb-6">
-                  {projects[lightboxIndex].location}
-                </p>
-                <div className="p-3 bg-white/5 border border-white/10 rounded-lg">
-                  <span className="font-sans text-xs text-white/80">
-                    To display final photography, upload: <br />
-                    <code className="font-mono text-xs text-brand-peach mt-1 block">
-                      public/images/{projects[lightboxIndex].imageName}
-                    </code>
-                  </span>
-                </div>
+              {/* Lightbox Image Container */}
+              <div className="relative w-full max-w-2xl h-80 md:h-96 rounded-xl overflow-hidden border border-white/10 bg-[#0c0c0c] flex items-center justify-center">
+                <Image
+                  src={`/images/${projects[lightboxIndex].imageName}`}
+                  alt={projects[lightboxIndex].title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 80vw, 1200px"
+                  className="object-cover"
+                  priority
+                />
               </div>
             </div>
 

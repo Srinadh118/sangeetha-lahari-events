@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { Heart, Briefcase, Sparkles, ArrowUpRight } from "lucide-react";
 
 export default function Services() {
@@ -12,7 +13,7 @@ export default function Services() {
       icon: <Heart className="w-6 h-6 text-brand-pink" />,
       colorClass: "bg-brand-pink text-white",
       btnColorClass: "bg-white text-ink hover:bg-canvas",
-      imageName: "service-wedding.jpg",
+      imageName: "service-wedding.webp",
       badgeText: "Luxurious",
     },
     {
@@ -22,7 +23,7 @@ export default function Services() {
       icon: <Briefcase className="w-6 h-6 text-brand-mint" />,
       colorClass: "bg-brand-teal text-white",
       btnColorClass: "bg-white text-ink hover:bg-canvas",
-      imageName: "service-corporate.jpg",
+      imageName: "service-corporate.webp",
       badgeText: "Professional",
     },
     {
@@ -32,7 +33,7 @@ export default function Services() {
       icon: <Sparkles className="w-6 h-6 text-brand-ochre" />,
       colorClass: "bg-brand-peach text-ink",
       btnColorClass: "bg-primary text-white hover:bg-primary-active",
-      imageName: "service-social.jpg",
+      imageName: "service-social.webp",
       badgeText: "Intimate",
     },
   ];
@@ -62,22 +63,16 @@ export default function Services() {
               className={`group flex flex-col justify-between p-8 rounded-xl transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl cursor-pointer ${service.colorClass}`}
             >
               <div>
-                {/* Image Placeholder Card */}
-                <div className="relative w-full h-48 rounded-lg overflow-hidden mb-6 bg-black/10 border border-white/10 flex flex-col items-center justify-center text-center p-4">
+                {/* Service Image Card */}
+                <div className="relative w-full h-48 rounded-lg overflow-hidden mb-6 bg-black/10 border border-white/10">
+                  <Image
+                    src={`/images/${service.imageName}`}
+                    alt={service.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  
-                  {/* Instructions Badge */}
-                  <div className="relative z-10 p-2 bg-canvas/10 backdrop-blur-md rounded border border-white/20 mb-2">
-                    <span className="font-sans text-[10px] uppercase font-bold tracking-wider text-white">
-                      Upload Required
-                    </span>
-                  </div>
-                  <span className="relative z-10 font-sans text-xs text-white/80 font-medium">
-                    Place image in: <br />
-                    <code className="text-white font-mono text-[11px] bg-black/40 px-1 py-0.5 rounded">
-                      public/images/{service.imageName}
-                    </code>
-                  </span>
                 </div>
 
                 {/* Badge Pill */}
