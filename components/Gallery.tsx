@@ -75,6 +75,15 @@ export default function Gallery() {
       bgGradient: "from-brand-peach/20 to-primary/40",
       heightClass: "h-80",
     },
+    {
+      id: 7,
+      title: "Sangeet performance stage",
+      location: "JRC Conventions, Jubilee Hills",
+      category: "Social",
+      imageName: "gallery-sangeet-performance.webp",
+      bgGradient: "from-brand-peach/20 to-primary/40",
+      heightClass: "h-80",
+    },
   ];
 
   const filteredProjects =
@@ -104,7 +113,7 @@ export default function Gallery() {
   return (
     <section id="gallery" className="bg-canvas py-24 border-b border-hairline/50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        
+
         {/* Header and Filter Row */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
           <div>
@@ -122,11 +131,10 @@ export default function Gallery() {
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
-                className={`px-5 py-2 font-sans text-xs font-semibold rounded-full transition-all cursor-pointer ${
-                  activeFilter === filter
-                    ? "bg-primary text-white shadow-sm"
-                    : "text-muted hover:text-ink"
-                }`}
+                className={`px-5 py-2 font-sans text-xs font-semibold rounded-full transition-all cursor-pointer ${activeFilter === filter
+                  ? "bg-primary text-white shadow-sm"
+                  : "text-muted hover:text-ink"
+                  }`}
               >
                 {filter}
               </button>
@@ -178,7 +186,7 @@ export default function Gallery() {
       {/* Lightbox Modal */}
       {lightboxIndex !== null && (
         <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col justify-between items-center py-6 px-4">
-          
+
           {/* Top Actions */}
           <div className="w-full max-w-7xl flex justify-between items-center text-white/80">
             <span className="font-sans text-sm font-semibold">

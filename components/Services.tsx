@@ -107,7 +107,7 @@ export default function Services() {
   return (
     <section id="services" className="bg-canvas py-24 border-b border-hairline/50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <div className="max-w-3xl mb-16">
           <span className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-brand-pink mb-3 block">
@@ -123,7 +123,7 @@ export default function Services() {
 
         {/* Layout Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 items-start">
-          
+
           {/* Left Column: Sticky Navigation (Desktop Only) */}
           <div className="hidden md:block md:col-span-4 sticky top-32 z-20">
             <div className="relative pl-6 flex flex-col gap-6">
@@ -248,7 +248,7 @@ export default function Services() {
                     <p className="font-sans text-sm text-body leading-relaxed">
                       {service.description}
                     </p>
-                    
+
                     <a
                       href="#contact"
                       className="inline-flex items-center justify-between px-4 py-2.5 rounded-md border border-hairline hover:bg-canvas transition-colors group"
