@@ -38,22 +38,22 @@ export default function TrustSection() {
 
   return (
     <section className="bg-canvas py-16 md:py-24 border-b border-hairline/50">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Statistics Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-16 md:mb-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mb-16 md:mb-20">
           {stats.map((stat, index) => (
             <div
               key={index}
-              className="bg-surface-card p-6 rounded-lg border border-hairline/60 flex flex-col items-center text-center hover:shadow-sm hover:border-hairline transition-all duration-300"
+              className="bg-surface-card p-4 xs:p-5 sm:p-6 rounded-lg border border-hairline/60 flex flex-col items-center text-center hover:shadow-sm hover:border-hairline transition-all duration-300"
             >
               <div className="mb-3 p-2 bg-canvas rounded-full border border-hairline/40">
                 {stat.icon}
               </div>
-              <span className="font-serif text-3xl md:text-4xl font-bold text-ink mb-1">
+              <span className="font-serif text-2xl xs:text-3xl md:text-4xl font-bold text-ink mb-1">
                 {stat.value}
               </span>
-              <span className="font-sans text-xs md:text-sm font-medium text-muted">
+              <span className="font-sans text-[10px] xs:text-xs md:text-sm font-medium text-muted">
                 {stat.label}
               </span>
             </div>

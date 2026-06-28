@@ -48,7 +48,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-10 opacity-5 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:24px_24px]" />
 
       {/* Content */}
-      <div className="relative z-20 max-w-7xl mx-auto px-6 lg:px-8 py-32 flex flex-col justify-center items-start text-left w-full h-full">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 flex flex-col justify-center items-start text-left w-full h-full">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -61,13 +61,13 @@ export default function Hero() {
           </span>
 
           {/* Heading */}
-          <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.1] mb-6 text-shadow-luxury">
+          <h1 className="font-serif text-3xl xs:text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold text-white tracking-tight leading-[1.1] mb-6 text-shadow-luxury">
             Make Your Celebration <br />
             <span className="text-brand-peach">Unforgettable</span>
           </h1>
 
           {/* Subheading */}
-          <p className="font-sans text-lg sm:text-xl text-on-dark-soft mb-10 max-w-xl leading-relaxed text-shadow-luxury">
+          <p className="font-sans text-base xs:text-lg sm:text-xl text-on-dark-soft mb-10 max-w-xl leading-relaxed text-shadow-luxury">
             Personalized event management in Hyderabad for weddings, corporate galas, milestone birthdays, and luxury social celebrations.
           </p>
 

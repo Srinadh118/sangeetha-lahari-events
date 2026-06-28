@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 @theme {
+  --breakpoint-xs: 400px;
+  --breakpoint-tablet-lg: 900px;
   --color-primary: #0a0a0a;
   --color-primary-active: #1f1f1f;
   --color-primary-disabled: #e5e5e5;
@@ -96,4 +98,12 @@ body {
 
 @utility text-shadow-luxury {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }

@@ -40,7 +40,7 @@ export default function CTA() {
         <div className="absolute inset-0 opacity-5 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:32px_32px]" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Left Column: Headline and Call Options */}
@@ -79,7 +79,7 @@ export default function CTA() {
 
           {/* Right Column: Quick Enquiry Form */}
           <div className="lg:col-span-6">
-            <div className="bg-surface-dark-elevated p-8 rounded-xl border border-white/10 shadow-lg">
+            <div className="bg-surface-dark-elevated p-5 xs:p-6 sm:p-8 rounded-xl border border-white/10 shadow-lg">
               <div className="flex items-center gap-2 mb-6">
                 <FileText className="w-5 h-5 text-brand-peach" />
                 <h3 className="font-serif text-2xl font-bold text-white">

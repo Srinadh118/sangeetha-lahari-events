@@ -48,8 +48,8 @@ export default function Testimonials() {
 
   return (
     <section id="testimonials" className="bg-canvas py-24 border-b border-hairline/50">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
         {/* Section Title & Header */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-16">
           <div className="lg:col-span-8">
@@ -62,8 +62,8 @@ export default function Testimonials() {
           </div>
 
           {/* Google Ratings Widget Card */}
-          <div className="lg:col-span-4 bg-surface-card p-6 rounded-lg border border-hairline/60 flex items-center justify-between shadow-sm">
-            <div>
+          <div className="lg:col-span-4 bg-surface-card p-4 xs:p-6 rounded-lg border border-hairline/60 flex flex-col xs:flex-row xs:items-center justify-between gap-4 shadow-sm">
+            <div className="flex flex-col items-start">
               <div className="flex items-center gap-1 mb-1">
                 <span className="font-sans text-xs font-bold text-ink bg-primary/10 px-2 py-0.5 rounded text-brand-pink">
                   Google
@@ -80,9 +80,9 @@ export default function Testimonials() {
                 Based on 160+ Happy Reviews
               </span>
             </div>
-            
+
             {/* Stars */}
-            <div className="flex flex-col items-end gap-1">
+            <div className="flex flex-col items-start xs:items-end gap-1">
               <div className="flex text-brand-ochre">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-4.5 h-4.5 fill-current" />
@@ -96,15 +96,15 @@ export default function Testimonials() {
         </div>
 
         {/* Carousel Slider Panel */}
-        <div className="relative max-w-4xl mx-auto bg-surface-soft border border-hairline p-8 md:p-12 rounded-xl shadow-sm">
-          
+        <div className="relative max-w-4xl mx-auto bg-surface-soft border border-hairline px-5 pb-8 pt-20 xs:px-8 sm:px-12 md:px-16 rounded-xl shadow-sm">
+
           {/* Quote Mark */}
-          <div className="absolute top-6 left-6 text-brand-pink/10 font-serif text-8xl pointer-events-none select-none">
+          <div className="absolute top-4 left-4 xs:top-6 xs:left-6 text-brand-pink/10 font-serif text-8xl pointer-events-none select-none">
             “
           </div>
 
           {/* Carousel Card Content */}
-          <div className="relative z-10 min-h-[160px] flex flex-col justify-between">
+          <div className="relative z-10 min-h-[300px] flex flex-col justify-between">
             <div>
               {/* Star Rating */}
               <div className="flex text-brand-ochre mb-6">
@@ -114,15 +114,15 @@ export default function Testimonials() {
               </div>
 
               {/* Review Text */}
-              <blockquote className="font-serif text-lg md:text-xl text-ink leading-relaxed italic mb-8">
+              <blockquote className="font-serif text-base xs:text-lg md:text-xl text-ink leading-relaxed italic mb-8 md:pr-12 xs:pr-0">
                 "{reviews[activeIndex].text}"
               </blockquote>
             </div>
 
             {/* Author Profile */}
-            <div className="flex items-center justify-between border-t border-hairline/60 pt-6">
+            <div className="flex flex-col xs:flex-row xs:items-center justify-between border-t border-hairline/60 pt-6 gap-4">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-surface-strong flex items-center justify-center border border-hairline">
+                <div className="w-12 h-12 rounded-full bg-surface-strong flex items-center justify-center border border-hairline shrink-0">
                   <User className="w-5 h-5 text-muted" />
                 </div>
                 <div>
@@ -142,7 +142,7 @@ export default function Testimonials() {
           </div>
 
           {/* Navigation Controls */}
-          <div className="absolute right-6 top-6 flex items-center gap-2">
+          <div className="absolute right-4 top-4 xs:right-6 xs:top-6 flex items-center gap-2">
             <button
               onClick={handlePrev}
               className="p-2 bg-canvas hover:bg-surface-strong text-ink rounded-full border border-hairline/60 transition-colors shadow-sm cursor-pointer"

@@ -31,7 +31,7 @@ export default function About() {
 
   return (
     <section id="about" className="bg-canvas py-24 border-b border-hairline/50">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Legacy Row */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-20">
@@ -79,7 +79,7 @@ export default function About() {
               </p>
               
               {/* Bullet Highlights */}
-              <div className="grid grid-cols-2 gap-4 pt-2">
+              <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 sm:gap-4 pt-2">
                 {[
                   "Family-Owned Values",
                   "Personalized Planning",
@@ -112,7 +112,7 @@ export default function About() {
           {cards.map((card, idx) => (
             <div
               key={idx}
-              className={`p-8 rounded-lg border border-hairline/60 flex flex-col items-start ${card.bgClass}`}
+              className={`p-6 xs:p-8 rounded-lg border border-hairline/60 flex flex-col items-start ${card.bgClass}`}
             >
               <div className="p-2.5 bg-canvas rounded-full border border-hairline/40 mb-4">
                 {card.icon}

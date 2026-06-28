@@ -173,10 +173,10 @@ export default function Gallery() {
 
   return (
     <section id="gallery" className="bg-canvas py-24 border-b border-hairline/50">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header and Filter Row */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
+        <div className="flex flex-col tablet-lg:flex-row tablet-lg:items-end justify-between gap-8 mb-12">
           <div>
             <span className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-brand-pink mb-3 block">
               Portfolio
@@ -187,14 +187,14 @@ export default function Gallery() {
           </div>
 
           {/* Filtering Tabs */}
-          <div className="flex flex-wrap gap-2 bg-surface-soft p-1.5 rounded-full border border-hairline/40 w-fit">
+          <div className="flex flex-wrap gap-2 w-full sm:w-auto justify-center sm:justify-start">
             {filters.map((filter) => (
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
-                className={`px-5 py-2 font-sans text-xs font-semibold rounded-full transition-all cursor-pointer ${activeFilter === filter
-                  ? "bg-primary text-white shadow-sm"
-                  : "text-muted hover:text-ink"
+                className={`px-5 py-2.5 font-sans text-xs font-semibold rounded-full transition-all cursor-pointer border ${activeFilter === filter
+                  ? "bg-primary text-white border-primary shadow-sm"
+                  : "bg-surface-soft text-muted border-hairline/60 hover:bg-surface-card hover:text-ink"
                   }`}
               >
                 {filter}
@@ -204,7 +204,7 @@ export default function Gallery() {
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 auto-rows-[320px] md:auto-rows-[280px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 auto-rows-[240px] xs:auto-rows-[280px] md:auto-rows-[280px]">
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, idx) => {
               const spanClass = getGridSpans(idx, filteredProjects.length);
@@ -274,23 +274,23 @@ export default function Gallery() {
           </div>
 
           {/* Core Content View */}
-          <div className="relative w-full max-w-5xl flex-1 flex items-center justify-between gap-4">
+          <div className="relative w-full max-w-5xl flex-1 flex items-center justify-center">
             {/* Prev Trigger */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 navigateLightbox("prev");
               }}
-              className="p-3 hover:bg-white/10 rounded-full transition-colors text-white cursor-pointer"
+              className="absolute left-2 md:left-4 z-20 p-2 md:p-3 bg-black/40 hover:bg-white/10 rounded-full transition-colors text-white cursor-pointer"
               aria-label="Previous image"
             >
-              <ChevronLeft className="w-8 h-8" />
+              <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
             </button>
 
             {/* Display View */}
-            <div className="flex-1 max-h-[70vh] flex flex-col items-center justify-center">
+            <div className="w-full h-full flex flex-col items-center justify-center px-2 md:px-12">
               {/* Lightbox Image Container */}
-              <div className="relative w-full max-w-5xl h-80 md:h-140 rounded-xl overflow-hidden border border-white/10 bg-[#0c0c0c] flex items-center justify-center">
+              <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] md:h-[65vh] md:aspect-auto rounded-xl overflow-hidden border border-white/10 bg-[#0c0c0c] flex items-center justify-center">
                 <Image
                   src={`/images/${projects[lightboxIndex].imageName}`}
                   alt={projects[lightboxIndex].title}
@@ -308,10 +308,10 @@ export default function Gallery() {
                 e.stopPropagation();
                 navigateLightbox("next");
               }}
-              className="p-3 hover:bg-white/10 rounded-full transition-colors text-white cursor-pointer"
+              className="absolute right-2 md:right-4 z-20 p-2 md:p-3 bg-black/40 hover:bg-white/10 rounded-full transition-colors text-white cursor-pointer"
               aria-label="Next image"
             >
-              <ChevronRight className="w-8 h-8" />
+              <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
             </button>
           </div>
 

@@ -19,6 +19,17 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
+
   const navLinks = [
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
@@ -37,7 +48,7 @@ export default function Navbar() {
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 h-full flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
           {/* Logo */}
           <a href="#home" className="flex flex-col group">
             <span className={`font-serif text-lg md:text-xl font-bold tracking-tight transition-colors duration-300 ${
@@ -55,7 +66,7 @@ export default function Navbar() {
           </a>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -86,7 +97,7 @@ export default function Navbar() {
             
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`p-2 md:hidden transition-colors focus:outline-none ${
+              className={`p-2 lg:hidden transition-colors focus:outline-none ${
                 isScrolled
                   ? "text-ink hover:text-brand-pink"
                   : "text-white hover:text-brand-peach"
@@ -101,7 +112,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Drawer */}
       <div
-        className={`fixed inset-0 z-40 bg-canvas transition-transform duration-300 md:hidden flex flex-col pt-24 px-6 ${
+        className={`fixed inset-0 z-40 bg-canvas transition-transform duration-300 lg:hidden flex flex-col pt-24 px-4 sm:px-6 overflow-y-auto max-h-screen pb-12 ${
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >

@@ -48,7 +48,7 @@ export default function Services() {
 
   // Intersection Observer for desktop scrolling cards
   useEffect(() => {
-    if (window.innerWidth < 768) return;
+    if (window.innerWidth < 1024) return;
 
     const observerOptions = {
       root: null,
@@ -57,6 +57,7 @@ export default function Services() {
     };
 
     const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      console.log("handleIntersection entry ids:", entries.map(e => `${e.target.id} (intersecting: ${e.isIntersecting})`), "isScrolling:", isScrolling.current);
       // Ignore intersection updates while a navigation transition (click) is scrolling the page
       if (isScrolling.current) return;
 
@@ -65,6 +66,7 @@ export default function Services() {
           const id = entry.target.id;
           const idx = parseInt(id.split("-")[2], 10);
           if (!isNaN(idx)) {
+            console.log("Setting active index from observer:", idx);
             setActiveIndex(idx);
           }
         }
@@ -82,17 +84,20 @@ export default function Services() {
   }, []);
 
   const handleNavClick = (idx: number) => {
+    console.log("handleNavClick called with:", idx);
     isScrolling.current = true;
     setActiveIndex(idx);
 
     const target = document.getElementById(`service-scroll-${idx}`);
     if (target) {
+      console.log("Scrolling target into view:", target.id);
       target.scrollIntoView({ behavior: "smooth", block: "center" });
     }
 
     // Debounce lock release to prevent intermediate cards from stealing focus
     if (scrollTimeoutRef.current) window.clearTimeout(scrollTimeoutRef.current);
     scrollTimeoutRef.current = window.setTimeout(() => {
+      console.log("Timeout finished. Resetting isScrolling to false");
       isScrolling.current = false;
     }, 1000);
   };
@@ -106,7 +111,7 @@ export default function Services() {
 
   return (
     <section id="services" className="bg-canvas py-24 border-b border-hairline/50">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section Header */}
         <div className="max-w-3xl mb-16">
@@ -122,10 +127,10 @@ export default function Services() {
         </div>
 
         {/* Layout Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
           {/* Left Column: Sticky Navigation (Desktop Only) */}
-          <div className="hidden md:block md:col-span-4 sticky top-32 z-20">
+          <div className="hidden lg:block lg:col-span-4 sticky top-32 z-20">
             <div className="relative pl-6 flex flex-col gap-6">
               {/* Continuous vertical timeline track */}
               <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-hairline/60 rounded" />
@@ -179,7 +184,7 @@ export default function Services() {
           </div>
 
           {/* Right Column: Scrollable Cards (Desktop Only) */}
-          <div className="hidden md:block md:col-span-8 space-y-24 pb-20">
+          <div className="hidden lg:block lg:col-span-8 space-y-6 lg:space-y-8 xl:space-y-24 pb-20">
             {services.map((service, idx) => {
               const theme = cardThemeMap[idx];
               return (
@@ -206,26 +211,30 @@ export default function Services() {
             })}
           </div>
 
-          {/* Mobile Fallback Stack (Mobile & Tablet < md) */}
-          <div className="block md:hidden col-span-12 space-y-12">
+          {/* Mobile Fallback Stack (Mobile & Tablet < lg) */}
+          <div className="block lg:hidden col-span-1 lg:col-span-12 space-y-12">
             {services.map((service, idx) => {
               const theme = cardThemeMap[idx];
               return (
                 <div
                   key={idx}
-                  className="flex flex-col gap-6 p-6 rounded-xl border border-hairline/60 bg-surface-soft shadow-sm"
+                  className="sticky flex flex-col gap-6 p-4 xs:p-6 rounded-xl border border-hairline/60 bg-surface-soft shadow-md transition-all duration-300"
+                  style={{
+                    top: `${80 + 24 * idx}px`,
+                    zIndex: idx + 10,
+                  }}
                 >
                   {/* Title and Index Row */}
-                  <div className="flex items-center justify-between border-b border-hairline/60 pb-3">
+                  <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-2 border-b border-hairline/60 pb-3">
                     <div className="flex items-center gap-3">
                       <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded-sm ${service.colorClass} text-white`}>
                         {service.index}
                       </span>
-                      <h3 className="font-serif text-xl md:text-2xl font-bold text-ink">
+                      <h3 className="font-serif text-lg xs:text-xl md:text-2xl font-bold text-ink">
                         {service.title}
                       </h3>
                     </div>
-                    <span className="font-sans text-xs font-semibold uppercase tracking-wider text-muted">
+                    <span className="font-sans text-xs font-semibold uppercase tracking-wider text-muted self-start xs:self-auto">
                       {service.badgeText}
                     </span>
                   </div>
